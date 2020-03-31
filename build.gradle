@@ -1,0 +1,57 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.dicom.extractor'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+repositories {
+	mavenCentral()
+	google()
+	maven { url 'http://www.dcm4che.org/maven2/' }
+	jcenter()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	implementation ("org.springframework.boot:spring-boot-starter-web"){
+		exclude module: "spring-boot-starter-logging"
+		exclude module: "logback-classic"
+	}
+	developmentOnly ("org.springframework.boot:spring-boot-devtools"){
+		exclude module: "spring-boot-starter-logging"
+		exclude module: "logback-classic"
+	}
+
+	implementation ("org.dcm4che:dcm4che-core:5.22.0"){
+		exclude module: "logback-classic"
+	}
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	// https://mvnrepository.com/artifact/org.dcm4che.tool/dcm4che-tool-dcm2json
+	compile (group: 'org.dcm4che.tool', name: 'dcm4che-tool-dcm2json', version: '5.22.0') {
+		exclude module: "logback-classic"
+	}
+
+	// https://mvnrepository.com/artifact/org.dcm4che/dcm4che-json
+	compile (group: 'org.dcm4che', name: 'dcm4che-json', version: '5.22.0'){
+		exclude module: "logback-classic"
+	}
+
+}
+
+test {
+	useJUnitPlatform()
+}
