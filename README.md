@@ -3,3 +3,8 @@ caMicroscope GSoC 2020 -  Real-time DICOM Metadata Extractor ( Sample code snipp
 
 
 ![Architecture](https://github.com/osiveayano/dicomExtractor/blob/master/architecture.jpg)
+
+
+![Springboot Project Execution](https://github.com/osiveayano/dicomExtractor/blob/master/springboot-run.jpg)
+
+
